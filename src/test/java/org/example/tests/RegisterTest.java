@@ -1,15 +1,18 @@
-package org.example;
+package org.example.tests;
 
 import io.qameta.allure.Description;
 import io.restassured.RestAssured;
 import org.example.api.ActionsUser;
 import org.example.data.User;
+import org.example.pages.user.HomePage;
 import org.example.utils.DriverExtension;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.openqa.selenium.WebDriver;
+
+import javax.sound.midi.SysexMessage;
 
 import static org.example.utils.EnvConfig.BASE_URL;
 
@@ -28,7 +31,7 @@ public class RegisterTest {
         User user = User.userWithRandomField();
 
         var homePage = new HomePage(driver);
-        homePage.openPage();
+
         homePage.openPage();
         var loginPage = homePage.clickAccountLink();
         var registerPage = loginPage.clickRegisterLink();
@@ -38,6 +41,12 @@ public class RegisterTest {
 
         var homeAuthPage = returnLoginPage.clickLogin(user);
         accessToken = homeAuthPage.getToken();
+//        accessToken = actionsUser
+//                .loginUser(user)
+//                .then()
+//                .extract()
+//                .path("accessToken");
+        System.out.println(accessToken);
     }
 
     @Test
