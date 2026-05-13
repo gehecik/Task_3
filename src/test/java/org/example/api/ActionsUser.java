@@ -1,22 +1,46 @@
 package org.example.api;
 
 import io.qameta.allure.Step;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
 
 
-public class DeleteUser {
+public class ActionsUser {
     @Step("Delete user by accessToken")
     public Response deleteByToken(String accessToken) {
         return given()
-                .log().all()
                 .header("authorization", accessToken)
                 .when()
-                .delete("/api/auth/user")
+                .delete("/api/auth/user");
+
+    }
+
+    @Step("Create user")
+    public Response createUser(Object user) {
+        return given()
+                .contentType(ContentType.JSON)
+                .body(user)
+                .post("/api/auth/register");
+    }
+    @Step("Create user and get accessToken")
+    public String createUserGetToken(Object user) {
+        return given()
+                .contentType(ContentType.JSON)
+                .body(user)
+                .post("/api/auth/register")
                 .then()
-                .log().all()
                 .extract()
-                .response();
+                .path("accessToken");
+    }
+
+
+    @Step("Login user")
+    public Response loginUser(Object user) {
+        return given()
+                .contentType(ContentType.JSON)
+                .body(user)
+                .post("/api/auth/login");
     }
 }
