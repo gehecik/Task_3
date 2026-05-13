@@ -20,18 +20,18 @@ public class BasePage {
     }
 
     public WebElement waitClickable(By locator) {
-//        return new WebDriverWait(driver, EXPLICIT_TIMEOUT)
-//                .until(ExpectedConditions.elementToBeClickable(locator));
+        return new WebDriverWait(driver, EXPLICIT_TIMEOUT)
+                .until(ExpectedConditions.elementToBeClickable(locator));
 
-        WebDriverWait wait = new WebDriverWait(driver, EXPLICIT_TIMEOUT);
-
-        WebElement element = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(locator)
-        );
-
-        return wait.until(
-                ExpectedConditions.elementToBeClickable(element)
-        );
+//        WebDriverWait wait = new WebDriverWait(driver, EXPLICIT_TIMEOUT);
+//
+//        WebElement element = wait.until(
+//                ExpectedConditions.visibilityOfElementLocated(locator)
+//        );
+//
+//        return wait.until(
+//                ExpectedConditions.elementToBeClickable(element)
+//        );
     }
 
     public WebElement checkLocator(By locator) {
@@ -71,20 +71,20 @@ public class BasePage {
     }
 
     public void enterNewValue(By locator, String newValue) {
-//        WebElement element = new WebDriverWait(driver, EXPLICIT_TIMEOUT)
-//                .until(ExpectedConditions.visibilityOfElementLocated(locator));
+        WebElement element = new WebDriverWait(driver, EXPLICIT_TIMEOUT)
+                .until(ExpectedConditions.visibilityOfElementLocated(locator));
+
+        element.clear();
+        element.sendKeys(newValue);
+
+//        WebDriverWait wait = new WebDriverWait(driver, EXPLICIT_TIMEOUT);
 //
-//        element.clear();
-//        element.sendKeys(newValue);
-
-        WebDriverWait wait = new WebDriverWait(driver, EXPLICIT_TIMEOUT);
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-
-        driver.findElement(locator).clear();
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-
-        driver.findElement(locator).sendKeys(newValue);
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+//
+//        driver.findElement(locator).clear();
+//
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+//
+//        driver.findElement(locator).sendKeys(newValue);
     }
 }

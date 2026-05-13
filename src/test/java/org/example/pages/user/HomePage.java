@@ -27,7 +27,7 @@ public class HomePage extends BasePage {
 
     @Step("Click on the link (accountLink)")
     public LoginPage clickAccountLink() {
-        waitLocator(accountLink);
+        //waitLocator(accountLink);
         waitClickable(accountLink).click();
 
         return new LoginPage(driver);
@@ -35,7 +35,7 @@ public class HomePage extends BasePage {
 
     @Step("Click on the button (loginToAccount)")
     public LoginPage clickLoginToAccount() {
-        waitLocator(loginToAccount);
+        //waitLocator(loginToAccount);
         waitClickable(loginToAccount).click();
 
         return new LoginPage(driver);
@@ -48,7 +48,7 @@ public class HomePage extends BasePage {
 
     @Step("Click on the link (accountLinkUser)")
     public ProfilePage clickAccountLinkUser() {
-        waitLocator(accountLink);
+        //waitLocator(accountLink);
         waitClickable(accountLink).click();
 
         return new ProfilePage(driver);

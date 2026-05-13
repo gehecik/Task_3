@@ -60,7 +60,7 @@ public class LoginPage extends BasePage {
         enterNewValue(inputPassword, user.getPassword());
 
         waitClickable(loginButton).click();
-        //waitLocator(personAccount);
+        waitLocator(personAccount);
 
         return new HomeAuthPage(driver);
     }
