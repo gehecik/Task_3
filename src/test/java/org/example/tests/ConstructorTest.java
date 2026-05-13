@@ -16,7 +16,7 @@ import org.openqa.selenium.WebDriver;
 
 import static org.example.utils.EnvConfig.BASE_URL;
 
-public class DesignerTest {
+public class ConstructorTest {
     @RegisterExtension
     private final DriverExtension extension = new DriverExtension();
     ActionsUser actionsUser = new ActionsUser();
@@ -29,7 +29,7 @@ public class DesignerTest {
 
 
     @BeforeEach
-    public void createUser() throws InterruptedException {
+    public void createAndLoginUser() throws InterruptedException {
         RestAssured.baseURI = BASE_URL;
         user = User.userWithRandomField();
         Response response = actionsUser.createUser(user);
@@ -48,8 +48,17 @@ public class DesignerTest {
     @DisplayName("Go from personal account to Designer")
     @Description("Check the transition by clicking on \"Designer\"")
     public void openPersonalAccount() throws InterruptedException {
-        var profilePage = homePage.clickAccountLinkRegisterUser();
+        var profilePage = homePage.clickAccountLinkUser();
         profilePage.checkProfilePage();
+    }
+
+    @Test
+    @DisplayName("Go to personal account")
+    @Description("Check the transition by clicking on the Stellar Burgers logo")
+    public void openPersonalAccountClickLogo() throws InterruptedException {
+        var profilePage = homePage.clickAccountLinkUser();
+        var homeAuthPage = profilePage.clickLogo();
+        homeAuthPage.checkStatusContentLoginAccount();
     }
 
     @AfterEach
