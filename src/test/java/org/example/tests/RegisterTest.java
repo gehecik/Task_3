@@ -39,7 +39,6 @@ public class RegisterTest {
         Thread.sleep(5000);
         var homeAuthPage = returnLoginPage.clickLogin(user);
         accessToken = homeAuthPage.getToken();
-        System.out.println(accessToken);
     }
 
     @Test
