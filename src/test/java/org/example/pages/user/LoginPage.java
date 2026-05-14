@@ -16,8 +16,8 @@ public class LoginPage extends BasePage {
     protected final By registerLink = By.xpath("//a[contains(@href, '/register')]");
     protected final By loginButton = By.xpath("//button[contains(text(),'Войти')]");
     protected final By logoutButton = By.xpath("//button[contains(text(),'Выйти')]");
-    protected final By inputEmail = By.xpath("//label[text()='Email']/following-sibling::input");//By.xpath("//label[contains(@class,'input__placeholder') and text()='Email']/following-sibling::input");//By.xpath("//input[@type='text']");//
-    protected final By inputPassword = By.xpath("//label[text()='Пароль']/following-sibling::input");//By.xpath("//input[@type='password']");//By.xpath("//label[contains(@class,'input__placeholder') and text()='Пароль']/following-sibling::input");//By.xpath("//input[@type='password']");
+    protected final By inputEmail = By.xpath("//label[text()='Email']/following-sibling::input");
+    protected final By inputPassword = By.xpath("//label[text()='Пароль']/following-sibling::input");
     protected final By userStatusContent = By.className("Auth_login__3hAey");
     protected final By forgotPasswordLink = By.xpath("//a[contains(@href, '/forgot-password')]");
     protected final By personAccount = By.xpath("//p[contains(text(),'Личный Кабинет')]");

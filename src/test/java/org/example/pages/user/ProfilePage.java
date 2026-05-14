@@ -9,7 +9,7 @@ public class ProfilePage extends BasePage {
     protected final By profileLink = By.xpath("//a[contains(@href,'/account/profile')]");
     protected final By designerLink = By.xpath("//a[@href='/' and contains(@class,'AppHeader_header__link__3D_hX')]");
     protected final By logoLink = By.xpath("//div[contains(@class,'AppHeader_header__logo__2D0X2')]//a");
-    protected final By logoutButton = By.xpath("//button[text()='Выход']");//By.xpath("//button[contains(@class,'Account_button__14Yp3')]");
+    protected final By logoutButton = By.xpath("//button[text()='Выход']");
     public ProfilePage(WebDriver driver) {
         super(driver);
     }
