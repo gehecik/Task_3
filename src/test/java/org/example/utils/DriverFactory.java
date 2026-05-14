@@ -30,6 +30,7 @@ public class DriverFactory {
         var options = new ChromeOptions();
         options.addArguments("--incognito");
         driver = new ChromeDriver();
+        driver.manage().deleteAllCookies();
     }
 
     public void startUpFirefox() {

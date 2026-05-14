@@ -40,6 +40,13 @@ public class BasePage {
                 .until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
+    public void goToElement(WebElement element) {
+        new org.openqa.selenium.interactions.Actions(driver)
+                .moveToElement(element)
+                .pause(java.time.Duration.ofMillis(300))
+                .perform();
+    }
+
     public String getAccessToken(By locator) throws InterruptedException {
         waitLocator(locator);
 
