@@ -21,28 +21,30 @@ public class ProfilePage extends BasePage {
         checkLocator(profileLink);
     }
 
-    @Step("Click on the link")
+    @Step("Click on the link (designerLink)")
     public HomeAuthPage clickDesigner() {
-        //checkLocator(designerLink);
+        checkLocator(designerLink);
+        waitOverlayDisappear();
         waitClickable(designerLink).click();
 
         return new HomeAuthPage(driver);
     }
 
-    @Step("Click on the link")
+    @Step("Click on the link (logoLink)")
     public HomeAuthPage clickLogo() {
+        waitOverlayDisappear();
         waitClickable(logoLink).click();
 
         return new HomeAuthPage(driver);
     }
 
-    @Step("Click on the button")
+    @Step("Click on the button (logoutButton)")
     public LoginPage clickLogout() {
         checkLocator(logoutButton);
+        waitOverlayDisappear();
         waitClickable(logoutButton).click();
 
         return new LoginPage(driver);
     }
-
 
 }

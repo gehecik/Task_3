@@ -13,13 +13,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import static org.example.utils.EnvConfig.BASE_URL;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ConstructorTabTest {
     @RegisterExtension
@@ -31,9 +27,6 @@ public class ConstructorTabTest {
 
     private WebDriver driver;
 
-
-
-
     @BeforeEach
     public void createUser() throws InterruptedException {
         RestAssured.baseURI = BASE_URL;
@@ -44,7 +37,6 @@ public class ConstructorTabTest {
         driver = extension.getDriver();
         homePage = new HomePage(driver);
         homePage.openPage();
-
     }
 
     @ParameterizedTest
@@ -57,7 +49,6 @@ public class ConstructorTabTest {
         homeAuthPage.clickCurrentTab(tabName);
         homeAuthPage.checkCurrentTab(tabName);
     }
-
 
     @AfterEach
     public void tearDown() {

@@ -8,7 +8,6 @@ import org.openqa.selenium.WebDriver;
 public class PasswordRecoveryPage extends BasePage {
     protected final By loginLink = By.cssSelector("a[href='/login']");
 
-
     public PasswordRecoveryPage(WebDriver driver) {
         super(driver);
     }

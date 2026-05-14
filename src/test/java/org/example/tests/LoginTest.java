@@ -26,7 +26,7 @@ public class LoginTest {
     private WebDriver driver;
 
     @BeforeEach
-    public void createUser() {
+    public void createUser() throws InterruptedException {
         RestAssured.baseURI = BASE_URL;
         user = User.userWithRandomField();
         Response response = actionsUser.createUser(user);

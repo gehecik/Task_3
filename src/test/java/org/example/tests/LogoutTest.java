@@ -26,8 +26,6 @@ public class LogoutTest {
 
     private WebDriver driver;
 
-
-
     @BeforeEach
     public void createUser() throws InterruptedException {
         RestAssured.baseURI = BASE_URL;
@@ -46,6 +44,7 @@ public class LogoutTest {
     public void openPersonalAccount() throws InterruptedException {
         var loginPage = homePage.clickLoginToAccount();
         var homeAuthPage = loginPage.clickLogin(user);
+        //Thread.sleep(5000);
         var profilePage = homeAuthPage.clickAccountLinkRegisterUser();
         loginPage = profilePage.clickLogout();
         loginPage.checkStatusContent();

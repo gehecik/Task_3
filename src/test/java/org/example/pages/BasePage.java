@@ -19,19 +19,15 @@ public class BasePage {
                 .until(ExpectedConditions.elementToBeClickable(locator));
     }
 
+
+    public WebElement waitPresence(By locator) {
+        return new WebDriverWait(driver, EXPLICIT_TIMEOUT)
+                .until(ExpectedConditions.presenceOfElementLocated(locator));
+    }
+
     public WebElement waitClickable(By locator) {
         return new WebDriverWait(driver, EXPLICIT_TIMEOUT)
                 .until(ExpectedConditions.elementToBeClickable(locator));
-
-//        WebDriverWait wait = new WebDriverWait(driver, EXPLICIT_TIMEOUT);
-//
-//        WebElement element = wait.until(
-//                ExpectedConditions.visibilityOfElementLocated(locator)
-//        );
-//
-//        return wait.until(
-//                ExpectedConditions.elementToBeClickable(element)
-//        );
     }
 
     public WebElement checkLocator(By locator) {
@@ -43,7 +39,6 @@ public class BasePage {
         new WebDriverWait(driver, EXPLICIT_TIMEOUT)
                 .until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
-
 
     public String getAccessToken(By locator) throws InterruptedException {
         waitLocator(locator);
@@ -76,15 +71,16 @@ public class BasePage {
 
         element.clear();
         element.sendKeys(newValue);
+    }
 
-//        WebDriverWait wait = new WebDriverWait(driver, EXPLICIT_TIMEOUT);
-//
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-//
-//        driver.findElement(locator).clear();
-//
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-//
-//        driver.findElement(locator).sendKeys(newValue);
+    public void waitOverlayDisappear() {
+        WebDriverWait wait = new WebDriverWait(driver, EXPLICIT_TIMEOUT);
+
+        try {
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(
+                    By.cssSelector(".Modal_modal_overlay__x2ZCr")
+            ));
+        } catch (Exception ignored) {
+        }
     }
 }

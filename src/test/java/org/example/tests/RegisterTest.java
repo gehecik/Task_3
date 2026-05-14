@@ -12,8 +12,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.RegisterExtension;
 import org.openqa.selenium.WebDriver;
 
-import javax.sound.midi.SysexMessage;
-
 import static org.example.utils.EnvConfig.BASE_URL;
 
 public class RegisterTest {
@@ -38,14 +36,9 @@ public class RegisterTest {
         registerPage.registerUser(user);
         var returnLoginPage = registerPage.clickRegisterButton();
         returnLoginPage.checkStatusContent();
-
+        Thread.sleep(5000);
         var homeAuthPage = returnLoginPage.clickLogin(user);
         accessToken = homeAuthPage.getToken();
-//        accessToken = actionsUser
-//                .loginUser(user)
-//                .then()
-//                .extract()
-//                .path("accessToken");
         System.out.println(accessToken);
     }
 

@@ -27,7 +27,6 @@ public class RegisterPage extends BasePage {
 
     @Step("Click on the register button")
     public LoginPage clickRegisterButton() {
-        //waitLocator(registerButton);
         waitClickable(registerButton).click();
 
         return new LoginPage(driver);

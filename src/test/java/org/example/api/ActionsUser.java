@@ -24,6 +24,7 @@ public class ActionsUser {
                 .body(user)
                 .post("/api/auth/register");
     }
+
     @Step("Create user and get accessToken")
     public String createUserGetToken(Object user) {
         return given()
@@ -34,7 +35,6 @@ public class ActionsUser {
                 .extract()
                 .path("accessToken");
     }
-
 
     @Step("Login user")
     public Response loginUser(Object user) {

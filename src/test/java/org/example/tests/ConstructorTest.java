@@ -42,6 +42,7 @@ public class ConstructorTest {
 
         homePage.setAccessToken(accessToken);
         driver.navigate().to(BASE_URL);
+        //Thread.sleep(5000);
     }
 
     @Test

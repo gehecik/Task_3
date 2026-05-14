@@ -5,7 +5,9 @@ import org.example.pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import static org.example.utils.EnvConfig.EXPLICIT_TIMEOUT;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -30,10 +32,10 @@ public class HomeAuthPage extends BasePage {
     public void checkStatusContentLoginAccount() {
         checkLocator(userStatusContent);
     }
+
     @Step("Click on the link")
     public ProfilePage clickAccountLinkRegisterUser() {
         waitClickable(accountLink).click();
-
         waitLocator(profileLink);
 
         return new ProfilePage(driver);
@@ -42,20 +44,32 @@ public class HomeAuthPage extends BasePage {
     @Step("Get current tab")
     public WebElement getCurrentTab() {
         checkLocator(tabCurrent);
+
         return waitClickable(tabCurrent);
     }
 
     @Step("Check current tab (tabCurrent)")
     public void checkCurrentTab(String tabName) throws InterruptedException {
+        By tabLocator = By.xpath("//div[contains(@class,'tab')][.//span[text()='" + tabName + "']]");
         By tabTitle = By.xpath("//h2[contains(@class,'text_type_main-medium') and text()='" + tabName + "']");
-        waitClickable(tabCurrent).click();
-        checkLocator(tabTitle);
+        waitOverlayDisappear();
 
-        WebElement element = waitClickable(tabCurrent);
+        WebElement element = waitClickable(tabLocator);
+        String classValue = element.getAttribute("class");
+        if (!classValue.contains("tab_tab_type_current")) {
+            waitOverlayDisappear();
+            element.click();
+        }
+
+        new WebDriverWait(driver, EXPLICIT_TIMEOUT)
+                .until(d -> element.getAttribute("class").contains("tab_tab_type_current"));
+        checkLocator(tabTitle);
+        waitOverlayDisappear();
 
         String value = element.getAttribute("class");
-        assertTrue(value.contains("current"));
+        assertTrue(value.contains("tab_tab_type_current"));
 
+        waitOverlayDisappear();
         String actualValue = element.findElement(By.tagName("span")).getText();
         assertEquals(tabName, actualValue);
     }
