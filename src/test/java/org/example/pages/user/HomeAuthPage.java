@@ -36,6 +36,9 @@ public class HomeAuthPage extends BasePage {
 
     @Step("Click on the link")
     public ProfilePage clickAccountLinkRegisterUser() {
+        waitOverlayDisappear();
+        waitLocator(userStatusContent);
+        waitOverlayDisappear();
         waitClickable(accountLink).click();
         waitLocator(profileLink);
 

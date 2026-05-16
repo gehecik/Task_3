@@ -58,7 +58,6 @@ public class ConstructorTest {
     @Description("Check the transition by clicking on the Stellar Burgers logo")
     public void openPersonalAccountClickLogo() throws InterruptedException {
         var profilePage = homePage.clickAccountLinkUser();
-        Thread.sleep(5000);
         var homeAuthPage = profilePage.clickLogo();
         homeAuthPage.checkStatusContentLoginAccount();
     }
