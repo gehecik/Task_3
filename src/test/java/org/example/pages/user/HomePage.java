@@ -43,11 +43,6 @@ public class HomePage extends BasePage {
         return new LoginPage(driver);
     }
 
-    @Step("Check")
-    public void checkHomePage() {
-        checkLocator(loginToAccount);
-    }
-
     @Step("Click on the link (accountLinkUser)")
     public ProfilePage clickAccountLinkUser() throws InterruptedException {
         waitOverlayDisappear();

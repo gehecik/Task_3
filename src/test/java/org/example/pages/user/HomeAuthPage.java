@@ -46,13 +46,6 @@ public class HomeAuthPage extends BasePage {
         return new ProfilePage(driver);
     }
 
-    @Step("Get current tab")
-    public WebElement getCurrentTab() {
-        checkLocator(tabCurrent);
-
-        return waitClickable(tabCurrent);
-    }
-
     @Step("Check current tab (tabCurrent)")
     public void checkCurrentTab(String tabName) throws InterruptedException {
         By tabLocator = By.xpath("//div[contains(@class,'tab')][.//span[text()='" + tabName + "']]");
@@ -60,33 +53,29 @@ public class HomeAuthPage extends BasePage {
         waitOverlayDisappear();
 
         WebElement element = waitClickable(tabLocator);
-        goToElement(element);
-        element = waitClickable(tabLocator);
-        String classValue = element.getAttribute("class");
-        if (!classValue.contains("tab_tab_type_current")) {
-            waitOverlayDisappear();
-            element.click();
-            new WebDriverWait(driver, EXPLICIT_TIMEOUT)
-                    .until(d -> waitClickable(tabLocator).getAttribute("class").contains("tab_tab_type_current"));
-        }
+        String value = element.getAttribute("class");
+        assertTrue(value.contains("tab_tab_type_current"));
         checkLocator(tabTitle);
-//        String value = element.getAttribute("class");
-//        assertTrue(value.contains("tab_tab_type_current"));
         String actualValue = element.findElement(By.tagName("span")).getText();
         assertEquals(tabName, actualValue);
     }
 
-
+    @Step("Click current tab")
     public void clickCurrentTab(String tabName) {
         By tabXpath = By.xpath("//div[contains(@class,'tab')][.//span[text()='" + tabName + "']]");
         checkLocator(tabXpath);
 
-        WebElement element = waitClickable(tabXpath);
         waitOverlayDisappear();
-        String classValue = element.getAttribute("class");
-
-        if (!classValue.contains("tab_tab_type_current")) {
+        WebElement element = waitClickable(tabXpath);
+        goToElement(element);
+        element = waitClickable(tabXpath);
+        waitOverlayDisappear();
+        String value = element.getAttribute("class");
+        if (!value.contains("tab_tab_type_current")) {
+            waitOverlayDisappear();
             element.click();
+            new WebDriverWait(driver, EXPLICIT_TIMEOUT)
+                    .until(d -> waitClickable(tabXpath).getAttribute("class").contains("tab_tab_type_current"));
         }
     }
 

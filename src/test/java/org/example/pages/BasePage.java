@@ -19,12 +19,6 @@ public class BasePage {
                 .until(ExpectedConditions.elementToBeClickable(locator));
     }
 
-
-    public WebElement waitPresence(By locator) {
-        return new WebDriverWait(driver, EXPLICIT_TIMEOUT)
-                .until(ExpectedConditions.presenceOfElementLocated(locator));
-    }
-
     public WebElement waitClickable(By locator) {
         return new WebDriverWait(driver, EXPLICIT_TIMEOUT)
                 .until(ExpectedConditions.elementToBeClickable(locator));

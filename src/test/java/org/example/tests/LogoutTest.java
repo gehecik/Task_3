@@ -49,7 +49,6 @@ public class LogoutTest {
         loginPage.checkStatusContent();
     }
 
-
     @AfterEach
     public void tearDown() {
         if (accessToken != null && !accessToken.isEmpty()) {

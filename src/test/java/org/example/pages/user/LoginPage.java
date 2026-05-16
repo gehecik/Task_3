@@ -5,12 +5,6 @@ import org.example.data.User;
 import org.example.pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import static org.example.utils.EnvConfig.BASE_URL;
-import static org.example.utils.EnvConfig.EXPLICIT_TIMEOUT;
 
 public class LoginPage extends BasePage {
     protected final By registerLink = By.xpath("//a[contains(@href, '/register')]");
@@ -40,18 +34,6 @@ public class LoginPage extends BasePage {
         return new PasswordRecoveryPage(driver);
     }
 
-    @Step("Check")
-    public void checkUserData(By locator, String field) {
-        WebDriverWait wait = new WebDriverWait(driver, EXPLICIT_TIMEOUT);
-
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-        String value = element.getAttribute("value");
-
-        if (value == null || value.isEmpty()) {
-            enterNewValue(locator, field);
-        }
-    }
-
     @Step("Click on the button (loginButton)")
     public HomeAuthPage clickLogin(User user) throws InterruptedException {
         waitOverlayDisappear();
@@ -70,10 +52,6 @@ public class LoginPage extends BasePage {
     @Step("Check")
     public void checkStatusContent() {
         checkLocator(userStatusContent);
-    }
-
-    public void openHomePage() {
-        driver.get(BASE_URL);
     }
 
     public void waitLoginFormLoaded() {
