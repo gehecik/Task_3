@@ -4,6 +4,7 @@ import io.qameta.allure.Step;
 import org.example.pages.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class ProfilePage extends BasePage {
     protected final By profileLink = By.xpath("//a[contains(@href,'/account/profile')]");
@@ -33,7 +34,11 @@ public class ProfilePage extends BasePage {
     @Step("Click on the link (logoLink)")
     public HomeAuthPage clickLogo() {
         waitOverlayDisappear();
-        waitClickable(logoLink).click();
+        waitLocator(logoLink);
+        waitOverlayDisappear();
+        WebElement element = waitClickable(logoLink);
+        waitOverlayDisappear();
+        element.click();
 
         return new HomeAuthPage(driver);
     }
@@ -42,7 +47,9 @@ public class ProfilePage extends BasePage {
     public LoginPage clickLogout() {
         checkLocator(logoutButton);
         waitOverlayDisappear();
-        waitClickable(logoutButton).click();
+        WebElement element = waitClickable(logoutButton);
+        waitOverlayDisappear();
+        element.click();
 
         return new LoginPage(driver);
     }

@@ -83,11 +83,21 @@ public class BasePage {
     public void waitOverlayDisappear() {
         WebDriverWait wait = new WebDriverWait(driver, EXPLICIT_TIMEOUT);
 
-        try {
-            wait.until(ExpectedConditions.invisibilityOfElementLocated(
-                    By.cssSelector(".Modal_modal_overlay__x2ZCr")
-            ));
-        } catch (Exception ignored) {
-        }
+//        try {
+//            wait.until(ExpectedConditions.invisibilityOfElementLocated(
+//                    By.cssSelector(".Modal_modal_overlay__x2ZCr")
+//            ));
+//        } catch (Exception ignored) {
+//        }
+        wait.until(driver -> {
+            try {
+                return driver.findElements(
+                        By.cssSelector(".Modal_modal_overlay__x2ZCr")
+                ).stream().noneMatch(WebElement::isDisplayed);
+
+            } catch (StaleElementReferenceException e) {
+                return true;
+            }
+        });
     }
 }
