@@ -73,31 +73,36 @@ public class BasePage {
     }
 
     public void enterNewValue(By locator, String newValue) {
-        WebElement element = new WebDriverWait(driver, EXPLICIT_TIMEOUT)
-                .until(ExpectedConditions.visibilityOfElementLocated(locator));
+        WebDriverWait wait = new WebDriverWait(driver, EXPLICIT_TIMEOUT);
 
-        element.clear();
-        element.sendKeys(newValue);
+
+        wait.until( driver -> {
+            try {
+                WebElement element = driver.findElement(locator);
+                element.clear();
+                element.sendKeys(newValue);
+                return element.getAttribute("value").equals(newValue);
+            } catch (StaleElementReferenceException e) {
+                return false;
+            }
+        });
     }
 
     public void waitOverlayDisappear() {
+        By overlay = By.cssSelector(".Modal_modal_overlay__x2ZCr");
         WebDriverWait wait = new WebDriverWait(driver, EXPLICIT_TIMEOUT);
 
-//        try {
-//            wait.until(ExpectedConditions.invisibilityOfElementLocated(
-//                    By.cssSelector(".Modal_modal_overlay__x2ZCr")
-//            ));
-//        } catch (Exception ignored) {
-//        }
         wait.until(driver -> {
             try {
-                return driver.findElements(
-                        By.cssSelector(".Modal_modal_overlay__x2ZCr")
-                ).stream().noneMatch(WebElement::isDisplayed);
-
+                return driver.findElements(overlay).stream().noneMatch(WebElement::isDisplayed);
             } catch (StaleElementReferenceException e) {
                 return true;
             }
         });
+    }
+
+    public void waitURL() {
+        new WebDriverWait(driver, EXPLICIT_TIMEOUT)
+                .until(ExpectedConditions.urlContains("/login"));
     }
 }

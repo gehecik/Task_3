@@ -36,7 +36,7 @@ public class RegisterTest {
         registerPage.registerUser(user);
         var returnLoginPage = registerPage.clickRegisterButton();
         returnLoginPage.checkStatusContent();
-        Thread.sleep(5000);
+        returnLoginPage.waitLoginFormLoaded();
         var homeAuthPage = returnLoginPage.clickLogin(user);
         accessToken = homeAuthPage.getToken();
     }

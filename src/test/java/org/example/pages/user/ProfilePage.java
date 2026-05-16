@@ -17,8 +17,9 @@ public class ProfilePage extends BasePage {
 
     @Step("Check")
     public void checkProfilePage() {
+        waitOverlayDisappear();
         waitLocator(profileLink);
-
+        waitOverlayDisappear();
         checkLocator(profileLink);
     }
 

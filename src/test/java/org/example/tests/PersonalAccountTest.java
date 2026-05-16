@@ -46,9 +46,7 @@ public class PersonalAccountTest {
     @DisplayName("Go to personal account")
     @Description("Check the transition by clicking on \"Personal Account\"")
     public void openPersonalAccount() throws InterruptedException {
-        Thread.sleep(5000);
         var profilePage = homePage.clickAccountLinkUser();
-        Thread.sleep(5000);
         var homeAuthPage = profilePage.clickDesigner();
         homeAuthPage.checkStatusContentLoginAccount();
     }

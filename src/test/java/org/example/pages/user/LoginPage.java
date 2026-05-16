@@ -54,8 +54,10 @@ public class LoginPage extends BasePage {
 
     @Step("Click on the button (loginButton)")
     public HomeAuthPage clickLogin(User user) throws InterruptedException {
+        waitOverlayDisappear();
         waitLocator(inputEmail);
         enterNewValue(inputEmail, user.getEmail());
+        waitOverlayDisappear();
         waitLocator(inputPassword);
         enterNewValue(inputPassword, user.getPassword());
 
@@ -74,4 +76,13 @@ public class LoginPage extends BasePage {
         driver.get(BASE_URL);
     }
 
+    public void waitLoginFormLoaded() {
+        waitURL();
+        waitOverlayDisappear();
+        waitLocator(inputEmail);
+        waitClickable(inputEmail);
+        waitOverlayDisappear();
+        waitLocator(inputPassword);
+        waitClickable(inputPassword);
+    }
 }

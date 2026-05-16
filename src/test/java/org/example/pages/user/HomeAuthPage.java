@@ -3,7 +3,6 @@ package org.example.pages.user;
 import io.qameta.allure.Step;
 import org.example.pages.BasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -39,7 +38,9 @@ public class HomeAuthPage extends BasePage {
         waitOverlayDisappear();
         waitLocator(userStatusContent);
         waitOverlayDisappear();
-        waitClickable(accountLink).click();
+        WebElement element = waitClickable(accountLink);
+        waitOverlayDisappear();
+        element.click();
         waitLocator(profileLink);
 
         return new ProfilePage(driver);
@@ -60,29 +61,17 @@ public class HomeAuthPage extends BasePage {
 
         WebElement element = waitClickable(tabLocator);
         goToElement(element);
+        element = waitClickable(tabLocator);
         String classValue = element.getAttribute("class");
         if (!classValue.contains("tab_tab_type_current")) {
             waitOverlayDisappear();
-            new WebDriverWait(driver, EXPLICIT_TIMEOUT)
-                    .until(d -> {
-                        try {
-                            return element.isDisplayed() && element.isEnabled();
-                        } catch (StaleElementReferenceException e) {
-                            return false;
-                        }
-                    });
             element.click();
+            new WebDriverWait(driver, EXPLICIT_TIMEOUT)
+                    .until(d -> waitClickable(tabLocator).getAttribute("class").contains("tab_tab_type_current"));
         }
-
-        new WebDriverWait(driver, EXPLICIT_TIMEOUT)
-                .until(d -> element.getAttribute("class").contains("tab_tab_type_current"));
         checkLocator(tabTitle);
-        //waitOverlayDisappear();
-
-        String value = element.getAttribute("class");
-        assertTrue(value.contains("tab_tab_type_current"));
-
-        //waitOverlayDisappear();
+//        String value = element.getAttribute("class");
+//        assertTrue(value.contains("tab_tab_type_current"));
         String actualValue = element.findElement(By.tagName("span")).getText();
         assertEquals(tabName, actualValue);
     }
@@ -93,7 +82,7 @@ public class HomeAuthPage extends BasePage {
         checkLocator(tabXpath);
 
         WebElement element = waitClickable(tabXpath);
-
+        waitOverlayDisappear();
         String classValue = element.getAttribute("class");
 
         if (!classValue.contains("tab_tab_type_current")) {

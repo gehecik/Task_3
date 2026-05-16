@@ -20,7 +20,8 @@ public class DriverFactory {
         } else if ("yandex".equals(System.getProperty("browser"))) {
             startUpYandex();
         } else {
-            startUpChrome();
+            //startUpChrome();
+            startUpFirefox();
         }
     }
 
