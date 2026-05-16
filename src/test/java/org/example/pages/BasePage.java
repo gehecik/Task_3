@@ -14,11 +14,6 @@ public class BasePage {
         this.driver = driver;
     }
 
-    public void checkClickableForLocator(By locator) {
-        new WebDriverWait(driver, EXPLICIT_TIMEOUT)
-                .until(ExpectedConditions.elementToBeClickable(locator));
-    }
-
     public WebElement waitClickable(By locator) {
         return new WebDriverWait(driver, EXPLICIT_TIMEOUT)
                 .until(ExpectedConditions.elementToBeClickable(locator));

@@ -16,7 +16,6 @@ public class HomeAuthPage extends BasePage {
     protected final By locatorAccessToken = By.xpath("//p[text()='Личный Кабинет']");
     protected final By userStatusContent = By.className("button_button_size_large__G21Vg");
     protected final By accountLink = By.cssSelector("a[href='/account']");
-    protected final By tabCurrent = By.cssSelector("div[class*='current']");
     protected final  By profileLink = By.xpath("//a[contains(@href,'/account/profile')]");
 
     public HomeAuthPage(WebDriver driver) {
